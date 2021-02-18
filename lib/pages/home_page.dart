@@ -23,29 +23,36 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
+    await Future.delayed(Duration(seconds: 2));
     final catlogJson = await rootBundle.loadString("assets/files/catlog.json");
     final decodedData = jsonDecode(catlogJson);
     var productsData = decodedData["products"];
-    print(productsData);
+    CatlogModel.items = List.from(productsData)
+        .map<Item>((item) => Item.fromMap(item))
+        .toList();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    final dummyList = List.generate(20, (index) => CatlogModel.items[0]);
+    // final dummyList = List.generate(20, (index) => CatlogModel.items[0]);
     return Scaffold(
       appBar: AppBar(
         title: Text("Catlog App"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView.builder(
-          itemCount: dummyList.length,
-          itemBuilder: (context, index) {
-            return ItemWidget(
-              item: dummyList[index],
-            );
-          },
-        ),
+        child: (CatlogModel.items != null && CatlogModel.items.isNotEmpty)
+            ? ListView.builder(
+                itemCount: CatlogModel.items.length,
+                itemBuilder: (context, index) =>  ItemWidget(
+                    item: CatlogModel.items[index],
+                  
+                },
+              )
+            : Center(
+                child: CircularProgressIndicator(),
+              ),
       ),
       drawer: MyDrawer(),
     );
