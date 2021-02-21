@@ -1,4 +1,4 @@
-class CatlogModel {
+class CatalogModel {
   static List<Item> items = [];
 }
 
