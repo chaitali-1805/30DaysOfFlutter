@@ -6,7 +6,6 @@ import 'package:flutter_catlog/models/catalog.dart';
 import 'package:flutter_catlog/utils/routes.dart';
 import 'package:flutter_catlog/widgets/home_widgets/catalog_header.dart';
 import 'package:flutter_catlog/widgets/home_widgets/catalog_list.dart';
-import 'package:flutter_catlog/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomePage extends StatefulWidget {
